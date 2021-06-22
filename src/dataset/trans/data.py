@@ -172,7 +172,7 @@ def balance_frame_sample(samples, seed=99, balancing_ratio=1, verbose=True) -> d
 
 
 def extract_pred_frame(trans, non_trans=None, pred_ahead=0, balancing_ratio=None,
-                       bbox_min=0, pos_min=0, seed=None, verbose=False) -> dict:
+                       bbox_min=0, pos_min=0, seed=None, neg_in_trans=False, verbose=False) -> dict:
     """
     Extract the frames in history for transition prediction task.
     :params: trans: transition history samples, i.e. GO or STOP
@@ -222,6 +222,8 @@ def extract_pred_frame(trans, non_trans=None, pred_ahead=0, balancing_ratio=None
             if TTE > pred_ahead / fps:
                 trans_label = 0
                 key = None
+                if neg_in_trans:
+                    key = idx + f"_f{frames[i]}"
             else:
                 trans_label = 1
                 n_1 += 1
