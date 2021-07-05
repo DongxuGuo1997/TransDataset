@@ -212,8 +212,8 @@ class PieTransDataset:
             for i in range(len(frames)):
                 key = None
                 old_id = None
-                d1 = min(i, 5)
-                d2 = min(len(frames) - i - 1, 5)
+                d1 = min(i, 15)
+                d2 = min(len(frames) - i - 1, 15)
                 if mode == "GO":
                     if next_transition[i] == 0 and action[i] == 1 and action[i - d1] == 0 and action[i + d2] == 1:
                         j += 1
